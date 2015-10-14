@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     <script type=text/javascript>
+          $(function() {
+           $('a#translate').bind('click', function() {
+             $.getJSON('/translate', {
+               textVal: $('input[name="textVal"]').val(),
+               textVal1: $('input[name="textVal1"]').val(),
+               textVal2: $('input[name="textVal2"]').val(),
+               textVal3: $('input[name="textVal3"]').val(),
+               textVal4: $('input[name="textVal4"]').val(),
+               textVal5: $('input[name="textVal5"]').val() 
+             }, function(data) {
+               $("#translatedText").text(data.result);
+             });
+             return false;
+           });
+         });
+     </script>	
+  </head>
+  
+  <body>  
+     <div class="container">
+          <!-- Trigger the modal with a button -->
+          <br/>
+          <br/>
+          <div align="right">
+               <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Help</button>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+               <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                         <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Help - VM allocator service</h4>
+                         </div>
+                         <div class="modal-body">
+                              <p>1. Refresh the page before generating the graph</p><br/>
+                              <p>2. Utilized PM resourses and needed VM resources (CPU, RAM and Network) % must be entered in the text box provided, as comma seperated values (it will have some values by default)</p><br/>
+                              <p>3. After entering the value click on generate graph button, once the graph is generated successfully "graph generated" message appears on screen</p></br>
+                              <p>4. Now click on the RBF Graph, Bar Graph buttons to view the generated graph respectively. Make sure that the graph is generated before viewing the graph, Refresh the page for every update in the values</p>
+                         </div>
+                         <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                         </div>
+                    </div>
+      
+               </div>
+          </div>
+          <div class="header">
+                  <h3 class="text-muted">Efficient VM resource Allocation service</h3>
+          </div>
+          <hr/>    
+          <div class="machine-main">
+               <div id="translate" class="tab-pane fade in">
+                    <div class="row">
+	             	    	 <div class="col-md-50 no-float">
+                              <div>
+                                   <p>
+			                    <br> 
+			                    PM CPU utilized resources &nbsp&nbsp&nbsp  
+			                    <br/><br/> 
+			                    <input class = "translateText" type="text" size="50" name="textVal" value="10,1,1,50,90,30,70,45,60,1,10,30,10,10,10,45,10,20,10,20,44,10,39,10,10">   
+			                    <br><br>
+			                    PM RAM utilized resources &nbsp&nbsp&nbsp  
+			                    <br/><br/> 
+			                    <input class = "translateText" type="text" size="50" name="textVal1" value="10,10,10,30,10,10,40,30,10,1,34,20,10,10,2,1,1,10,1,10,10,3,54,10,2"> 		
+			                    <br><br>	         
+			                    PM Network utilized resources &nbsp&nbsp&nbsp  
+			                    <br/><br/> 
+			                    <input class = "translateText" type="text" size="50" name="textVal2" value="10,90,1,1,40,10,60,40,1,10,1,3,23,3,4,16,10,12,10,20,11,1,1,20,10"> 
+			              	     <br><br>	         
+			              	     VM CPU needed resources &nbsp&nbsp&nbsp  
+			              	     <br/><br/> 
+			              	     <input class = "translateText" type="text" size="50" name="textVal3" value="10,4,12,10,10,20,22,21,10,30"> 
+			              		<br><br>	         
+			              		VM RAM needed resources &nbsp&nbsp&nbsp  
+			              		<br/><br/> 
+			              		<input class = "translateText" type="text" size="50" name="textVal4" value="40,66,59,10,3,8,50,10,34,33"> 
+			              	     <br><br>	         
+			              	     VM Network needed resources &nbsp&nbsp&nbsp  <br/><br/> <input class = "translateText" type="text" size="50" name="textVal5" value="10,49,22,1,10,10,9,54,10,5">  <br/><br/><br/><br/>
+			                    <span id="translatedText"></span>
+			                    <p><a href="javascript:void();" id="translate"  class="btn btn-default btn-success">Generate Graph</a>
+                              </div>
+                         </div>
+                         <br/>
+			          <br/>
+		               <form action="upload" method="post" enctype="multipart/form-data" target="createResult">
+                              <input type="submit" name="submit" value=" Line Graph - Skewness RBF " class="btn btn-default btn-success"><br /><br />
+				          <input type="submit" name="submit" value="&nbsp&nbsp Bar Graph - Before Alloc &nbsp&nbsp&nbsp" class="btn btn-default btn-success" ><br /><br />
+				          <input type="submit" name="submit" value="&nbsp&nbsp&nbsp Bar Graph - After Alloc &nbsp&nbsp&nbsp&nbsp" class="btn btn-default btn-success" ><br /><br />
+                              <br />
+                              <br />
+		               </form>
+		               <span id="translatedText"></span>
+				                  
+		               <div class="col-md-9 no-float">
+		                    <br/>
+				          <br/>
+                              <iframe name="createResult" width=850 height=400 frameBorder=0></iframe>
+			          </div>
+		          </div>
+               </div>
+          </div>
+     </div>
+     <script type="text/javascript" src="static/js/jquery.js"></script>
+  </body>
+</html>
+ 
